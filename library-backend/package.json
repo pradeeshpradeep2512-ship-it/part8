@@ -12,7 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^5.5.0",
+    "dotenv": "^18.0.4",
     "graphql": "^16.13.2",
+    "graphql-errors": "^2.1.0",
+    "mongoose": "^9.10.2",
+    "mongoose-unique-validator": "^6.1.1",
     "uuid": "^14.0.2"
   }
 }
