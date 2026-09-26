@@ -40,31 +40,37 @@ const Authors = (props) => {
           ))}
         </tbody>
       </table>
-      
-      <h3>Set birthyear</h3>
-      <form onSubmit={async (event) => {
-        event.preventDefault()
-        editAuthor({ variables: { name, setBornTo: Number(born) } })
-        setName('')
-        setBorn('')
-      }}>
-        <div>
-          name
-          <input
-            value={name}
-            onChange={({ target }) => setName(target.value)}
-          />
-        </div>
-        <div>
-          born
-          <input
-            type="number"
-            value={born}
-            onChange={({ target }) => setBorn(target.value)}
-          />
-        </div>
-        <button type="submit">update author</button>
-      </form>
+      {props.token && (
+        <>
+          <h3>Set birthyear</h3>
+          <form onSubmit={async (event) => {
+            event.preventDefault()
+            editAuthor({ variables: { name, setBornTo: Number(born) } })
+            setName('')
+            setBorn('')
+          }}>
+            <div>
+              name
+              <select name="name" value={name} onChange={({ target }) => setName(target.value)}>
+                <option value="">-- select author --</option>
+                {authors.map((a) => (
+                  <option key={a.name} value={a.name}>{a.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              born
+              <input
+                type="number"
+                value={born}
+                onChange={({ target }) => setBorn(target.value)}
+                aria-label="born"
+              />
+            </div>
+            <button type="submit">update author</button>
+          </form>
+        </>
+      )}
     </div>
   )
 }

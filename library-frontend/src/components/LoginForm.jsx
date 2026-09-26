@@ -5,10 +5,12 @@ import { LOGIN } from '../queries'
 const LoginForm = ({ show, setToken, setPage }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(null)
 
   const [ login, result ] = useMutation(LOGIN, {
     onError: (error) => {
-      console.log(error.graphQLErrors[0].message)
+      setError('login failed')
+      setTimeout(() => setError(null), 5000)
     }
   })
 
@@ -34,6 +36,7 @@ const LoginForm = ({ show, setToken, setPage }) => {
 
   return (
     <div>
+      {error && <div style={{color: 'red'}}>{error}</div>}
       <form onSubmit={submit}>
         <div>
           username <input
